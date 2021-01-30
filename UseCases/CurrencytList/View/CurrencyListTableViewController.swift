@@ -15,6 +15,8 @@ class CurrencyListTableViewController: UITableViewController {
         }
     }
     
+    var callback: () ->() = {}
+    
     @IBOutlet weak var tableview: UITableView!
     
     override func viewDidLoad() {
@@ -24,11 +26,12 @@ class CurrencyListTableViewController: UITableViewController {
         self.tableview.register(nibCell, forCellReuseIdentifier: "currencyCell")
         //set viewModel
         self.currencyListViewModel = CurrencyListViewModel()
-        let callback = { [unowned self] in
+        
+        self.callback = { [unowned self] in
             print("callback is caled")
             self.tableview.reloadData()
         }
-        self.currencyListViewModel?.getData(with: callback)
+        self.currencyListViewModel?.getData(with: self.callback)
         
     }
     
@@ -37,9 +40,9 @@ class CurrencyListTableViewController: UITableViewController {
     }
     
     // MARK: - Support functions
-    @objc func buyProduct(with sender:UIButton) {
+    @objc func makeStarred(with sender:UIButton) {
         self.currencyListViewModel?.selectedRow = sender.tag
-        self.currencyListViewModel?.buyProduct()
+        self.currencyListViewModel?.processStar()
     }
 
 
@@ -54,17 +57,26 @@ class CurrencyListTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return (self.currencyListViewModel?.numberOfRows(for: section))!
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Section \(indexPath.section) Row \(indexPath.row)")
+    }
+    
+     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let title = self.currencyListViewModel?.getTitle(for: section) else {return String()}
+        return title
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
+        let section = indexPath.section
         let row  = indexPath.row
         guard let string1 = self.currencyListViewModel?.getCurrency(for: row) else {return UITableViewCell()}
         guard let string2 = self.currencyListViewModel?.getRate(for: row) else { return UITableViewCell()}
         
         cell.currencyLabel.text = string1 + " - \(string2)"
-        cell.selectCurrency .addTarget(self, action: #selector(buyProduct(with:)), for: .touchUpInside)
+        cell.selectCurrency .addTarget(self, action: #selector(makeStarred(with:)), for: .touchUpInside)
         cell.selectCurrency.tag = row
         return cell
     }

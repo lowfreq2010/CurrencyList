@@ -15,11 +15,16 @@ class Fetcher: NSObject {
 }
 
 class JSONOnlineFetcher: Fetcher {
-
+    
     override func fetch() -> Data {
         guard let url = URL(string: self.jsonSource) else {return Data()}
         guard let data = try? Data(contentsOf: url) else {return Data()}
         return data
+    }
+    
+    override init() {
+        super.init()
+        self.jsonSource = "https://openexchangerates.org/api/latest.json?app_id=YOUR_APP_ID"
     }
 }
 
