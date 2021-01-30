@@ -9,28 +9,27 @@ import Foundation
 
 class Fetcher: NSObject {
     var jsonSource:String = ""
-    func fetch() -> Data {
-        return Data()
+    func fetch(_ completion: @escaping (Data) -> ()) -> Void {
     }
 }
 
 class JSONOnlineFetcher: Fetcher {
     
-    override func fetch() -> Data {
-        guard let url = URL(string: self.jsonSource) else {return Data()}
-        guard let data = try? Data(contentsOf: url) else {return Data()}
-        return data
-    }
-    
     override init() {
         super.init()
         self.jsonSource = "https://openexchangerates.org/api/latest.json?app_id=YOUR_APP_ID"
+    }
+    
+    override func fetch(_ completion: @escaping (Data) -> ()) -> Void  {
+        guard let url = URL(string: self.jsonSource) else {return}
+        guard let data = try? Data(contentsOf: url) else {return}
+        completion(data)
     }
 }
 
 class JSONOfflineFetcher: Fetcher {
     
-    override func fetch() -> Data {
+    override func fetch(_ completion: @escaping (Data)->()) -> () {
         self.jsonSource = """
         {
            "disclaimer":"https://openexchangerates.org/terms/",
@@ -50,7 +49,7 @@ class JSONOfflineFetcher: Fetcher {
         }
         """
         let data = self.jsonSource.data(using: .utf8)!
-        return data
+        completion(data)
     }
 }
 

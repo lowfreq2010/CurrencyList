@@ -28,7 +28,6 @@ class CurrencyListTableViewController: UITableViewController {
         self.currencyListViewModel = CurrencyListViewModel()
         
         self.callback = { [unowned self] in
-            print("callback is caled")
             self.tableview.reloadData()
         }
         self.currencyListViewModel?.getData(with: self.callback)

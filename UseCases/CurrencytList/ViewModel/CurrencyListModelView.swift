@@ -16,18 +16,18 @@ protocol CurrencyListViewModelProtocol {
 }
 
 class CurrencyListViewModel: CurrencyListViewModelProtocol {
-
+    
     private var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
     
     private var selectedCurrencies: [String] = []
     private var currencies: [String] = []   // contains all currency codes to display
     
     var selectedRow: Int  = 0
-
+    
     // MARK: Service class objects
     let jsonFetcher: Fetcher = JSONOfflineFetcher()
     let jsonProcessor: JSONProcessor = JSONProcessor()
-
+    
     // MARK: UITableview delegate/source
     func numberOfSections()->Int {
         // return self.selectedCurrencies.count == 0 ? 1 : 2
@@ -63,14 +63,15 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     // fetch all currency data
     func getData(with callback:@escaping () -> ()) {
         
-        let jsonData = self.jsonFetcher.fetch()
-        let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
-        self.rates = currencyList.rates
-        let names =  self.rates.map {$0.key}
-        self.currencies = names.sorted(by:<)
-        
-        // force view to do whatever it needs to do
-        callback()
+        let _: Void = self.jsonFetcher.fetch({[unowned self] jsonData in
+            
+            let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
+            self.rates = currencyList.rates
+            let names =  self.rates.map {$0.key}
+            self.currencies = names.sorted(by:<)
+            // force view to do whatever it needs to do
+            callback()
+        })
     }
     
     // return currency code for given row

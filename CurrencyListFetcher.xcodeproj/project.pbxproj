@@ -17,7 +17,6 @@
 		B723EBD025BAAA140057DB36 /* CurrencyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBC925BAAA140057DB36 /* CurrencyListTableViewController.swift */; };
 		B723EBD125BAAA140057DB36 /* CurrencyListModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */; };
 		B723EBD225BAAA140057DB36 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */; };
-		B792790625C46DC900E3C129 /* defaultcurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = B792790525C46DC900E3C129 /* defaultcurrencies.json */; };
 		B792790C25C4B12A00E3C129 /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790B25C4B12A00E3C129 /* JSONFetcher.swift */; };
 		B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */; };
 		B7ADE13E25C6098E00C82720 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE14025C6098E00C82720 /* Localizable.strings */; };
@@ -35,13 +34,11 @@
 		B723EBC925BAAA140057DB36 /* CurrencyListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListTableViewController.swift; sourceTree = "<group>"; };
 		B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListModelView.swift; sourceTree = "<group>"; };
 		B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
-		B792790525C46DC900E3C129 /* defaultcurrencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaultcurrencies.json; sourceTree = "<group>"; };
 		B792790B25C4B12A00E3C129 /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
 		B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONProcessor.swift; sourceTree = "<group>"; };
 		B7ADE13625C608BD00C82720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7ADE13725C608BE00C82720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7ADE13F25C6098E00C82720 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B7ADE14525C60A4500C82720 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B7ADE14825C60A5200C82720 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +78,6 @@
 				B723EBA225B9B7400057DB36 /* AppDelegate.swift */,
 				B723EBA425B9B7400057DB36 /* SceneDelegate.swift */,
 				B723EBA825B9B7400057DB36 /* Main.storyboard */,
-				B792790525C46DC900E3C129 /* defaultcurrencies.json */,
 				B723EBAB25B9B74D0057DB36 /* Assets.xcassets */,
 				B723EBAD25B9B74D0057DB36 /* LaunchScreen.storyboard */,
 				B7ADE14025C6098E00C82720 /* Localizable.strings */,
@@ -217,7 +213,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B792790625C46DC900E3C129 /* defaultcurrencies.json in Resources */,
 				B7ADE13E25C6098E00C82720 /* Localizable.strings in Resources */,
 				B723EBCF25BAAA140057DB36 /* CurrencyListTableViewCell.xib in Resources */,
 				B7ADE14725C60A5200C82720 /* Localizable.strings in Resources */,
@@ -260,7 +255,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				B7ADE13725C608BE00C82720 /* Base */,
-				B7ADE14525C60A4500C82720 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
