@@ -2,7 +2,7 @@
 //  ProductFetchTableViewCell.swift
 //  currencyList
 //
-//  Created by VNS Work on 21.01.2021.
+//  Created by VNS Work on 29.01.2021.
 //
 
 import UIKit

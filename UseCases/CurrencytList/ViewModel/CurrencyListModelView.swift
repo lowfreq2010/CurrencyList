@@ -2,7 +2,7 @@
 //  currencyListModelView.swift
 //  currencyList
 //
-//  Created by VNS Work on 21.01.2021.
+//  Created by VNS Work on 29.01.2021.
 //
 
 import Foundation
@@ -10,16 +10,16 @@ import Foundation
 protocol CurrencyListViewModelProtocol {
     func buyProduct()
     func numberOfSections() -> Int
-    func numberOfRows() -> Int
+    func numberOfRows(for section:Int) -> Int
     
 }
 
 class CurrencyListViewModel: CurrencyListViewModelProtocol {
-    
+
     private var currencies: [String] = []   // contains all currency codes to display
     private var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
     
-    var selectedCurrencies: [Currency] = []
+    var selectedCurrencies: [String] = []
     var selectedRow: Int  = 0
 
     // Service objects
@@ -32,28 +32,39 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     }
     
     func numberOfSections()->Int {
-        return 1
+        return self.selectedCurrencies.count == 0 ? 1 : 2
     }
     
-    func numberOfRows()->Int {
-        return self.currencies.count
+    func numberOfRows(for section:Int)->Int {
+        var numOfRows = 0
+
+        if (section == 1)  {
+            numOfRows = self.currencies.count
+        } else if ((section == 0) && (self.selectedCurrencies.count == 0)) {
+            numOfRows = self.currencies.count
+        } else if ((section == 0) && (self.selectedCurrencies.count > 0)) {
+            numOfRows = self.selectedCurrencies.count
+        }
+        return numOfRows
     }
     
     func getData(with callback:@escaping () -> ()) {
         let jsonData = self.jsonFetcher.fetch()
         let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
-        let rates = currencyList.rates
-        let names =  rates.map {$0.key}
+        self.rates = currencyList.rates
+        let names =  self.rates.map {$0.key}
         self.currencies = names.sorted(by:<)
-//
-//        print(String(describing: type(of: rates)))
-//        print(String(describing: type(of: self.currencies)))
-//        print(self.currencies)
+        
+        // force view to do whatever it needs to do
         callback()
     }
     
     func getCurrency(for row:Int) -> String {
-       return self.currencies[row]
+        return self.currencies[row]
+    }
+    
+    func getRate(for row:Int) -> Float {
+        return self.rates["\(self.getCurrency(for: row))"]!
     }
     
     

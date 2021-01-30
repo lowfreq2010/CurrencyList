@@ -2,7 +2,7 @@
 //  currencyListTableViewController.swift
 //  currencyList
 //
-//  Created by VNS Work on 21.01.2021.
+//  Created by VNS Work on 29.01.2021.
 //
 
 import UIKit
@@ -52,16 +52,20 @@ class CurrencyListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.currencyListViewModel?.numberOfRows())!
+        return (self.currencyListViewModel?.numberOfRows(for: section))!
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
-        cell.currencyLabel.text = self.currencyListViewModel?.getCurrency(for: indexPath.row)
+        let row  = indexPath.row
+        guard let string1 = self.currencyListViewModel?.getCurrency(for: row) else {return UITableViewCell()}
+        guard let string2 = self.currencyListViewModel?.getRate(for: row) else { return UITableViewCell()}
+        
+        cell.currencyLabel.text = string1 + " - \(string2)"
         cell.selectCurrency .addTarget(self, action: #selector(buyProduct(with:)), for: .touchUpInside)
-        cell.selectCurrency.tag = indexPath.row
+        cell.selectCurrency.tag = row
         return cell
     }
 
