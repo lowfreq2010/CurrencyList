@@ -20,15 +20,15 @@
 		B792790625C46DC900E3C129 /* defaultcurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = B792790525C46DC900E3C129 /* defaultcurrencies.json */; };
 		B792790C25C4B12A00E3C129 /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790B25C4B12A00E3C129 /* JSONFetcher.swift */; };
 		B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */; };
+		B7ADE13E25C6098E00C82720 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE14025C6098E00C82720 /* Localizable.strings */; };
+		B7ADE14725C60A5200C82720 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE14925C60A5200C82720 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B723EB9F25B9B7400057DB36 /* CurrencyListFetcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyListFetcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B723EBA225B9B7400057DB36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B723EBA425B9B7400057DB36 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B723EBA925B9B7400057DB36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B723EBAB25B9B74D0057DB36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B723EBAE25B9B74D0057DB36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B723EBB025B9B74D0057DB36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B723EBC725BAAA140057DB36 /* CurrencyListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListTableViewCell.swift; sourceTree = "<group>"; };
 		B723EBC825BAAA140057DB36 /* CurrencyListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrencyListTableViewCell.xib; sourceTree = "<group>"; };
@@ -38,6 +38,11 @@
 		B792790525C46DC900E3C129 /* defaultcurrencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaultcurrencies.json; sourceTree = "<group>"; };
 		B792790B25C4B12A00E3C129 /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
 		B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONProcessor.swift; sourceTree = "<group>"; };
+		B7ADE13625C608BD00C82720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7ADE13725C608BE00C82720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B7ADE13F25C6098E00C82720 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B7ADE14525C60A4500C82720 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B7ADE14825C60A5200C82720 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +84,8 @@
 				B792790525C46DC900E3C129 /* defaultcurrencies.json */,
 				B723EBAB25B9B74D0057DB36 /* Assets.xcassets */,
 				B723EBAD25B9B74D0057DB36 /* LaunchScreen.storyboard */,
+				B7ADE14025C6098E00C82720 /* Localizable.strings */,
+				B7ADE14925C60A5200C82720 /* Localizable.strings */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -193,6 +200,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = B723EB9625B9B7400057DB36;
 			productRefGroup = B723EBA025B9B7400057DB36 /* Products */;
@@ -210,7 +218,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B792790625C46DC900E3C129 /* defaultcurrencies.json in Resources */,
+				B7ADE13E25C6098E00C82720 /* Localizable.strings in Resources */,
 				B723EBCF25BAAA140057DB36 /* CurrencyListTableViewCell.xib in Resources */,
+				B7ADE14725C60A5200C82720 /* Localizable.strings in Resources */,
 				B723EBAF25B9B74D0057DB36 /* LaunchScreen.storyboard in Resources */,
 				B723EBAC25B9B74D0057DB36 /* Assets.xcassets in Resources */,
 				B723EBAA25B9B7400057DB36 /* Main.storyboard in Resources */,
@@ -241,7 +251,7 @@
 		B723EBA825B9B7400057DB36 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B723EBA925B9B7400057DB36 /* Base */,
+				B7ADE13625C608BD00C82720 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -249,9 +259,26 @@
 		B723EBAD25B9B74D0057DB36 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B723EBAE25B9B74D0057DB36 /* Base */,
+				B7ADE13725C608BE00C82720 /* Base */,
+				B7ADE14525C60A4500C82720 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B7ADE14025C6098E00C82720 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7ADE13F25C6098E00C82720 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B7ADE14925C60A5200C82720 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7ADE14825C60A5200C82720 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -261,6 +288,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -308,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -322,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -363,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

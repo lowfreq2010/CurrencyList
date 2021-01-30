@@ -19,7 +19,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
 
     private var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
     
-    private var selectedCurrencies: [String] = ["AOA","AFN"]
+    private var selectedCurrencies: [String] = []
     private var currencies: [String] = []   // contains all currency codes to display
     
     var selectedRow: Int  = 0
@@ -30,29 +30,29 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
 
     // MARK: UITableview delegate/source
     func numberOfSections()->Int {
-        return self.selectedCurrencies.count == 0 ? 1 : 2
+        // return self.selectedCurrencies.count == 0 ? 1 : 2
+        return 2
     }
     
     func numberOfRows(for section:Int)->Int {
-        var numOfRows = 0
-
-        if (section == 1)  {
+        var numOfRows: Int
+        
+        switch section {
+        case 1:
             numOfRows = self.currencies.count
-        } else if ((section == 0) && (self.selectedCurrencies.count == 0)) {
-            numOfRows = self.currencies.count
-        } else if ((section == 0) && (self.selectedCurrencies.count > 0)) {
+        default:
             numOfRows = self.selectedCurrencies.count
         }
         return numOfRows
     }
     
     func getTitle(for section:Int) -> String? {
-        var title = NSLocalizedString("COMMONLIST", comment: "")
+        var title: String?
         
-        if (section == 1)  {
-        } else if ((section == 0) && (self.selectedCurrencies.count == 0)) {
+        switch section {
+        case 1:
             title = NSLocalizedString("COMMONLIST", comment: "")
-        } else if ((section == 0) && (self.selectedCurrencies.count > 0)) {
+        default:
             title = NSLocalizedString("SELECTEDLIST", comment: "")
         }
         return title
@@ -62,6 +62,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     // fetch all currency data
     func getData(with callback:@escaping () -> ()) {
+        
         let jsonData = self.jsonFetcher.fetch()
         let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
         self.rates = currencyList.rates
