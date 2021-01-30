@@ -24,10 +24,15 @@ class CurrencyListTableViewController: UITableViewController {
         self.tableview.register(nibCell, forCellReuseIdentifier: "currencyCell")
         //set viewModel
         self.currencyListViewModel = CurrencyListViewModel()
+        let callback = { [unowned self] in
+            print("callback is caled")
+            self.tableview.reloadData()
+        }
+        self.currencyListViewModel?.getData(with: callback)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableview.estimatedRowHeight = 300
         self.tableview.rowHeight = UITableView.automaticDimension
     }
     
@@ -54,12 +59,9 @@ class CurrencyListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
-        cell.currencyLabel.text = "USD - \(indexPath.row)"
+        cell.currencyLabel.text = self.currencyListViewModel?.getCurrency(for: indexPath.row)
         cell.selectCurrency .addTarget(self, action: #selector(buyProduct(with:)), for: .touchUpInside)
         cell.selectCurrency.tag = indexPath.row
-
-//        cell.productBuy .addTarget(self, action: #selector(buyProduct(with:)), for: .touchUpInside)
-//        cell.productBuy.tag = indexPath.row
         return cell
     }
 

@@ -8,7 +8,14 @@
 import Foundation
 
 struct Currency {
-    var name: String
-    var code : String
-    var exchangeRate: Float
+    let code: String
+    let rate: Float
+}
+
+struct CurrencyResponse: Decodable {
+    let disclaimer:URL
+    let license:URL
+    let timestamp: Double
+    let base: String
+    let rates: [String:Float]
 }
