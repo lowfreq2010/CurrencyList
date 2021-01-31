@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  CurrencyListFetcher
+
+  Created by VNS Work on 31.01.2021.
+  
+*/
+
+"COMMONLIST" = "Общий список валют";
+"SELECTEDLIST" = "Избранные валюты";
+"NOMORETHAN5" = "В Избранное можно добавить только 5 валют.";
+"CLOSE" = "Закрыть";

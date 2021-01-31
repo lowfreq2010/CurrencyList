@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  CurrencyListFetcher
+
+  Created by VNS Work on 31.01.2021.
+  
+*/
+"COMMONLIST" = "Common currencies list";
+"SELECTEDLIST" = "Selected currencies";
+"NOMORETHAN5" = "No more than 5 selected currencies are allowed.";
+"CLOSE" = "Close";

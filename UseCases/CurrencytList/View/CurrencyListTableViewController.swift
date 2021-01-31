@@ -2,7 +2,7 @@
 //  currencyListTableViewController.swift
 //  currencyList
 //
-//  Created by VNS Work on 21.01.2021.
+//  Created by VNS Work on 29.01.2021.
 //
 
 import UIKit
@@ -15,6 +15,8 @@ class CurrencyListTableViewController: UITableViewController {
         }
     }
     
+    var callback: () ->() = {}
+    
     @IBOutlet weak var tableview: UITableView!
     
     override func viewDidLoad() {
@@ -24,19 +26,20 @@ class CurrencyListTableViewController: UITableViewController {
         self.tableview.register(nibCell, forCellReuseIdentifier: "currencyCell")
         //set viewModel
         self.currencyListViewModel = CurrencyListViewModel()
+        
+        self.callback = { [unowned self] in
+            DispatchQueue.main.async {
+                self.tableview.reloadData()
+            }
+        }
+        self.currencyListViewModel?.callback = self.callback
+        self.currencyListViewModel?.getData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableview.estimatedRowHeight = 300
         self.tableview.rowHeight = UITableView.automaticDimension
     }
-    
-    // MARK: - Support functions
-    @objc func buyProduct(with sender:UIButton) {
-        self.currencyListViewModel?.selectedRow = sender.tag
-        self.currencyListViewModel?.buyProduct()
-    }
-
 
     // MARK: - Table view data source
 
@@ -47,19 +50,49 @@ class CurrencyListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.currencyListViewModel?.numberOfRows())!
+        return (self.currencyListViewModel?.numberOfRows(for: section))!
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Section \(indexPath.section) Row \(indexPath.row)")
+    }
+    
+     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let title = self.currencyListViewModel?.getTitle(for: section) else {return String()}
+        return title
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
-        cell.currencyLabel.text = "USD - \(indexPath.row)"
-        cell.selectCurrency .addTarget(self, action: #selector(buyProduct(with:)), for: .touchUpInside)
-        cell.selectCurrency.tag = indexPath.row
+        let section = indexPath.section
+        let row  = indexPath.row
+        var string1,string2 :String
+        
+        switch section {
+        case 0:
+            string1 = self.currencyListViewModel?.getSelectedCurrency(for: row) ?? ""
+            string2 = String(self.currencyListViewModel?.getSelectedCurrencyRate(for: row) ?? 0)
+        case 1:
+            string1 = self.currencyListViewModel?.getCurrency(for: row) ?? ""
+            string2 = String(self.currencyListViewModel?.getRate(for: row) ?? 0)
 
-//        cell.productBuy .addTarget(self, action: #selector(buyProduct(with:)), for: .touchUpInside)
-//        cell.productBuy.tag = indexPath.row
+        default:
+            return UITableViewCell()
+        }
+
+        
+        // setup closure to be called on Star button tap
+        cell.selectCurrencyButtonAction = { [unowned self] in
+             print("Star button has been clicked")
+            self.currencyListViewModel?.processStar(on: indexPath)
+        }
+        
+        cell.currencyLabel.text = string1 + " - \(string2)"
+        
+//        cell.selectCurrency .addTarget(self, action: #selector(makeStarred(with:)), for: .touchUpInside)
+//        cell.selectCurrency.tag = row
+        
         return cell
     }
 
