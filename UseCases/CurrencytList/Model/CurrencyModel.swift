@@ -13,8 +13,8 @@ struct Currency {
 }
 
 struct CurrencyResponse: Decodable {
-    let disclaimer:URL
-    let license:URL
+    let disclaimer:String
+    let license:String
     let timestamp: Double
     let base: String
     let rates: [String:Float]

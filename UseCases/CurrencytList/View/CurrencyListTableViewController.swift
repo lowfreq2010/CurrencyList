@@ -25,7 +25,7 @@ class CurrencyListTableViewController: UITableViewController {
         let nibCell :UINib = UINib(nibName: "CurrencyListTableViewCell", bundle: nil)
         self.tableview.register(nibCell, forCellReuseIdentifier: "currencyCell")
         //set viewModel
-        self.currencyListViewModel = CurrencyListViewModel()
+        self.currencyListViewModel = CurrencyListViewModel(with: JSONOnlineFetcher()) //you can pass JSONOfflineFetcher() for development purposes
         
         self.callback = { [unowned self] in
             DispatchQueue.main.async {

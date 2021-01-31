@@ -30,12 +30,6 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
         }
     }
     
-//    var originalCurrencies: [String] {
-//        get {
-//            return self.originalList
-//        }
-//    }
-    
     var currentList: [String] {
         get {
             return self.currencies
@@ -56,9 +50,16 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     var selectedRow: Int  = 0
     
     // MARK: Service class objects
-    let jsonFetcher: Fetcher = JSONOfflineFetcher()
+    
+    let jsonFetcher: Fetcher
+
     let jsonProcessor: JSONProcessor = JSONProcessor()
     let nsudProcessor: CurrencyListNSUD = CurrencyListNSUD(with: "selectedCurrencies", value: [])
+    
+    // MARK: Initializers
+    init(with fetcher:Fetcher) {
+        self.jsonFetcher = fetcher
+    }
     
     // MARK: UITableview delegate/source
     func numberOfSections()->Int {
