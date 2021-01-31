@@ -17,6 +17,7 @@
 		B723EBD025BAAA140057DB36 /* CurrencyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBC925BAAA140057DB36 /* CurrencyListTableViewController.swift */; };
 		B723EBD125BAAA140057DB36 /* CurrencyListModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */; };
 		B723EBD225BAAA140057DB36 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */; };
+		B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B765616025C710DD0006E4FA /* PersistentStorage.swift */; };
 		B792790C25C4B12A00E3C129 /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790B25C4B12A00E3C129 /* JSONFetcher.swift */; };
 		B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */; };
 		B7ADE13E25C6098E00C82720 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE14025C6098E00C82720 /* Localizable.strings */; };
@@ -38,6 +39,7 @@
 		B723EBC925BAAA140057DB36 /* CurrencyListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListTableViewController.swift; sourceTree = "<group>"; };
 		B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListModelView.swift; sourceTree = "<group>"; };
 		B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
+		B765616025C710DD0006E4FA /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
 		B792790B25C4B12A00E3C129 /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
 		B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONProcessor.swift; sourceTree = "<group>"; };
 		B7ADE13625C608BD00C82720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				B792790B25C4B12A00E3C129 /* JSONFetcher.swift */,
 				B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */,
+				B765616025C710DD0006E4FA /* PersistentStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */,
 				B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */,
 				B723EBA325B9B7400057DB36 /* AppDelegate.swift in Sources */,
 				B723EBA525B9B7400057DB36 /* SceneDelegate.swift in Sources */,

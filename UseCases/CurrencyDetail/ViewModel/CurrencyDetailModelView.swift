@@ -21,14 +21,13 @@ class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
 
     var currencyName = "AED"  // code of currency shown on detail
     var originalList: [String] = [] // contains all currency codes that existed originally
+    var otherCurrencies: [String] = []
     var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
-
-    private var otherCurrencies: [String] = []
 
     // MARK: UITableview delegate/source
     
     func headerForTable() -> String? {
-        return currencyName
+        return self.currencyName
     }
     
     func numberOfSections()->Int {
@@ -37,13 +36,15 @@ class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
     
     func numberOfRows(for section:Int)->Int {
         
-        var numOfRows: Int
+        var numOfRows: Int = 0
         
         switch section {
         case 0:
             numOfRows = 0
-        default:
+        case 1:
             numOfRows = self.otherCurrencies.count
+        default:
+            break
         }
         return numOfRows
     }

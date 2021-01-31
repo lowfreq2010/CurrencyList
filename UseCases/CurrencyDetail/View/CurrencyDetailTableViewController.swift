@@ -9,11 +9,7 @@ import UIKit
 
 class CurrencyDetailTableViewController: UITableViewController {
 
-    var currencyDetailViewModel  : CurrencyDetailViewModel? {
-        didSet {
-            self.tableview.reloadData()
-        }
-    }
+    var currencyDetailViewModel  : CurrencyDetailViewModel = CurrencyDetailViewModel()
     
     @IBOutlet weak var tableview: UITableView!
     
@@ -35,16 +31,16 @@ class CurrencyDetailTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.currencyDetailViewModel?.numberOfSections())!
+        return (self.currencyDetailViewModel.numberOfSections())
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.currencyDetailViewModel?.numberOfRows(for: section))!
+        return (self.currencyDetailViewModel.numberOfRows(for: section))
     }
     
      override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let title = self.currencyDetailViewModel?.getTitle(for: section) else {return String()}
+        guard let title = self.currencyDetailViewModel.getTitle(for: section) else {return String()}
         return title
     }
 
@@ -52,8 +48,8 @@ class CurrencyDetailTableViewController: UITableViewController {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as? CurrencyDetailTableViewCell else {return UITableViewCell()}
         let row  = indexPath.row
-        let currencyCode = self.currencyDetailViewModel?.getCurrency(for: row) ?? ""
-        let exchangeRate = String(self.currencyDetailViewModel?.calculateRate(for: currencyCode) ?? 0)
+        let currencyCode = self.currencyDetailViewModel.getCurrency(for: row)
+        let exchangeRate = String(self.currencyDetailViewModel.calculateRate(for: currencyCode))
         cell.currencyName.text = currencyCode + " - " + exchangeRate
         
         return cell

@@ -43,6 +43,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     // MARK: Service class objects
     let jsonFetcher: Fetcher = JSONOfflineFetcher()
     let jsonProcessor: JSONProcessor = JSONProcessor()
+    let nsudProcessor: CurrencyListNSUD = CurrencyListNSUD(with: "selectedCurrencies", value: [])
     
     // MARK: UITableview delegate/source
     func numberOfSections()->Int {
@@ -86,6 +87,9 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
             let names =  self.rates.map {$0.key}
             self.originalList = names.sorted(by:<)
             self.currencies = self.originalList // make a copy of currency codes for later use
+            // try to restore saved selected currencies
+            let selCurr: [String]? = self.nsudProcessor.restore()
+            self.selectedCurrencies = selCurr ?? []
             
             // force view to do whatever it needs to do
             self.callback()
@@ -126,6 +130,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
         default:
             break
         }
+        self.nsudProcessor.save()
     }
     
     // MARK: processing append/remove to Selected list
@@ -155,4 +160,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     func subtractSelected() -> [String] {
         return self.originalList.filter { !self.selectedCurrencies.contains($0) } .sorted(by: <)
     }
+    
+    // MARK: Save/Restore selected currencies
+    
 }

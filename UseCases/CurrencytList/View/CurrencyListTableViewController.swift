@@ -105,9 +105,10 @@ class CurrencyListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "toCurrencyDetail" {
             let vc = segue.destination as! CurrencyDetailTableViewController
-            vc.currencyDetailViewModel?.currencyName = "AED"  // code of currency shown on detail
-            vc.currencyDetailViewModel?.originalList = self.currencyListViewModel?.originalCurrencies ?? []
-            vc.currencyDetailViewModel?.rates =  self.currencyListViewModel?.originalRates ?? [:]
+            
+//            vc.currencyDetailViewModel?.currencyName = "AED"  // code of currency shown on detail
+//            vc.currencyDetailViewModel?.originalList = self.currencyListViewModel?.originalCurrencies ?? []
+//            vc.currencyDetailViewModel?.rates =  self.currencyListViewModel?.originalRates ?? [:]
             print("yeah")
         }
     }
