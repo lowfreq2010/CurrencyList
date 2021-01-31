@@ -68,17 +68,16 @@ class CurrencyListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
         let section = indexPath.section
         let row  = indexPath.row
-        var string1,string2 :String
+        var string1,string2 :String , buttonColor: UIColor = .black
         
         switch section {
         case 0:
             string1 = self.currencyListViewModel?.getSelectedCurrency(for: row) ?? ""
             string2 = String(self.currencyListViewModel?.getSelectedCurrencyRate(for: row) ?? 0)
-            cell.selectCurrency.setTitleColor(.red, for: .normal)
+            buttonColor = .red
         case 1:
             string1 = self.currencyListViewModel?.getCurrency(for: row) ?? ""
             string2 = String(self.currencyListViewModel?.getRate(for: row) ?? 0)
-            cell.selectCurrency.setTitleColor(.black, for: .normal)
 
         default:
             return UITableViewCell()
@@ -92,9 +91,7 @@ class CurrencyListTableViewController: UITableViewController {
         }
         
         cell.currencyLabel.text = string1 + " - \(string2)"
-        
-//        cell.selectCurrency .addTarget(self, action: #selector(makeStarred(with:)), for: .touchUpInside)
-//        cell.selectCurrency.tag = row
+        cell.selectCurrency.setTitleColor(buttonColor, for: .normal)
         
         return cell
     }
@@ -128,12 +125,12 @@ class CurrencyListTableViewController: UITableViewController {
                     break
                 }
             }
+            
+            // pass all data to new VC
             vc.currencyDetailViewModel.currencyName = currencySelected  // code of currency shown on detail
             let rates = self.currencyListViewModel!.originalRates
             vc.currencyDetailViewModel.rates =  rates
             vc.currencyDetailViewModel.otherCurrencies = other
-
-            print("yeah")
         }
     }
 }
