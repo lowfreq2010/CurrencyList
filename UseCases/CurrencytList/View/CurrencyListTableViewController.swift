@@ -55,6 +55,7 @@ class CurrencyListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Section \(indexPath.section) Row \(indexPath.row)")
+        performSegue(withIdentifier: "toCurrencyDetail", sender: indexPath)
     }
     
      override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -96,14 +97,41 @@ class CurrencyListTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-    }
-    */
+        if segue.identifier == "toCurrencyDetail" {
+            let vc = segue.destination as! CurrencyDetailTableViewController
+            // calculate name of selected currency and list of currencies to be displayed
+            var section = 0
+            var row = 0
+            var currencySelected = ""
+            var other:[String] = []
+            
+            if (sender is IndexPath) {
+                let sentobject = sender as? IndexPath
+                section = sentobject?.section ?? 0
+                row = sentobject?.row ?? 0
+                switch section {
+                case 0:
+                    currencySelected = self.currencyListViewModel!.getSelectedCurrency(for: row)
+                    other = self.currencyListViewModel!.currentList
+                case 1:
+                    currencySelected = self.currencyListViewModel!.getCurrency(for: row)
+                    other = self.currencyListViewModel!.selectedList
+                default:
+                    break
+                }
+            }
+            vc.currencyDetailViewModel.currencyName = currencySelected  // code of currency shown on detail
+            let rates = self.currencyListViewModel!.originalRates
+            vc.currencyDetailViewModel.rates =  rates
+            vc.currencyDetailViewModel.otherCurrencies = other
 
+            print("yeah")
+        }
+    }
 }

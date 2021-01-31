@@ -24,6 +24,33 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     private var currencies: [String] = []   // contains all currency codes to display
     private var originalList: [String] = [] // contains all currency codes that existed originally
     
+    var originalRates: [String:Float] {
+        get {
+            return self.rates
+        }
+    }
+    
+//    var originalCurrencies: [String] {
+//        get {
+//            return self.originalList
+//        }
+//    }
+    
+    var currentList: [String] {
+        get {
+            return self.currencies
+        }
+    }
+    
+    var selectedList: [String] {
+        get {
+            return self.selectedCurrencies
+        }
+    }
+    
+    
+    
+    
     var callback: () -> () = {}
     
     var selectedRow: Int  = 0
@@ -31,6 +58,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     // MARK: Service class objects
     let jsonFetcher: Fetcher = JSONOfflineFetcher()
     let jsonProcessor: JSONProcessor = JSONProcessor()
+    let nsudProcessor: CurrencyListNSUD = CurrencyListNSUD(with: "selectedCurrencies", value: [])
     
     // MARK: UITableview delegate/source
     func numberOfSections()->Int {
@@ -73,8 +101,10 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
             self.rates = currencyList.rates
             let names =  self.rates.map {$0.key}
             self.originalList = names.sorted(by:<)
-            self.currencies = self.originalList // make a copy of currency codes for later use
-            
+            // try to restore saved selected currencies
+            let selCurr: [String]? = self.nsudProcessor.restore()
+            self.selectedCurrencies = selCurr ?? []
+            self.currencies = subtractSelected()
             // force view to do whatever it needs to do
             self.callback()
         })
@@ -114,6 +144,8 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
         default:
             break
         }
+        self.nsudProcessor.storedValue = self.selectedCurrencies
+        self.nsudProcessor.save()
     }
     
     // MARK: processing append/remove to Selected list
@@ -143,4 +175,5 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     func subtractSelected() -> [String] {
         return self.originalList.filter { !self.selectedCurrencies.contains($0) } .sorted(by: <)
     }
+    
 }

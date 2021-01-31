@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A0g-rU-oOe">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,11 +34,44 @@
                     <navigationItem key="navigationItem" id="M3x-vZ-Wk6"/>
                     <connections>
                         <outlet property="tableview" destination="bR4-iN-6T6" id="yFs-VN-xC5"/>
+                        <segue destination="Psn-Yv-oOl" kind="show" identifier="toCurrencyDetail" id="i4R-Jv-PKd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXA-j1-0yl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1157.9710144927537" y="133.92857142857142"/>
+        </scene>
+        <!--Currency Detail Table View Controller-->
+        <scene sceneID="6OY-Ot-0D7">
+            <objects>
+                <tableViewController id="Psn-Yv-oOl" customClass="CurrencyDetailTableViewController" customModule="CurrencyListFetcher" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BUB-jk-Zwe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailCell" id="tzc-MY-Lms" customClass="CurrencyDetailTableViewCell" customModule="CurrencyListFetcher" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tzc-MY-Lms" id="bgL-hC-1dF">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Psn-Yv-oOl" id="MvW-Nr-dKr"/>
+                            <outlet property="delegate" destination="Psn-Yv-oOl" id="mbL-lY-f3T"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="bRh-zp-JsG"/>
+                    <connections>
+                        <outlet property="tableview" destination="BUB-jk-Zwe" id="u3f-3r-hdB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yv2-6B-fI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2109" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RJh-VX-IAN">

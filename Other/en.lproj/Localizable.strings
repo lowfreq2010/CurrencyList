@@ -9,3 +9,5 @@
 "SELECTEDLIST" = "Selected currencies";
 "NOMORETHAN5" = "No more than 5 selected currencies are allowed.";
 "CLOSE" = "Close";
+"ALLOTHERCURRENCIES" = "All other currencies";
+"SELECTECURRENCY" = "Selected currency";
