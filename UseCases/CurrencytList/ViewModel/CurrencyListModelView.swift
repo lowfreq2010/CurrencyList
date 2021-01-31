@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol CurrencyListViewModelProtocol {
     func processStar(on indexPath: IndexPath)
@@ -63,22 +64,6 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     // MARK: Convenience methods
     
-//    // fetch all currency data
-//    func getData(with callback:@escaping () -> ()) {
-//
-//        let _: Void = self.jsonFetcher.fetch({[unowned self] jsonData in
-//
-//            let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
-//            self.rates = currencyList.rates
-//            let names =  self.rates.map {$0.key}
-//            self.originalList = names.sorted(by:<)
-//            self.currencies = self.originalList // make a copy of currency codes for later use
-//
-//            // force view to do whatever it needs to do
-//            callback()
-//        })
-//    }
-    
     // fetch all currency data
     func getData() {
         
@@ -135,18 +120,24 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     func moveCurrencyToSelected(from position: Int) -> Void {
         let currencyName: String = self.getCurrency(for: position)
-        self.selectedCurrencies.append(currencyName)
-        self.currencies.remove(at: position)
-        print("moving to Selected in row \(position) Currency is \(currencyName)")
-        self.callback()
+        if self.selectedCurrencies.count==5 {
+            let alertController = UIAlertController(title:"", message: NSLocalizedString("NOMORETHAN5", comment: ""), preferredStyle: .alert)
+            let close = UIAlertAction(title: NSLocalizedString("CLOSE", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
+            alertController.addAction(close)
+            UIApplication.shared.windows.last?.rootViewController?.present(alertController, animated: true, completion: nil)
+        } else {
+            self.selectedCurrencies.append(currencyName)
+            self.currencies.remove(at: position)
+            print("moving to Selected in row \(position) Currency is \(currencyName)")
+            self.callback()
+        }
     }
     
     func removeFromSelected(from position: Int) -> Void {
-        let currencyName = self.getCurrency(for: position)
+
         self.selectedCurrencies.remove(at: position)
         self.currencies = subtractSelected()
         self.callback()
-        print("removing from Seleted in row \(position) Currency is \(currencyName)")
     }
     
     func subtractSelected() -> [String] {
