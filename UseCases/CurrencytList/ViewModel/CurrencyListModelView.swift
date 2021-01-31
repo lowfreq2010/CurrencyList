@@ -86,11 +86,10 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
             self.rates = currencyList.rates
             let names =  self.rates.map {$0.key}
             self.originalList = names.sorted(by:<)
-            self.currencies = self.originalList // make a copy of currency codes for later use
             // try to restore saved selected currencies
             let selCurr: [String]? = self.nsudProcessor.restore()
             self.selectedCurrencies = selCurr ?? []
-            
+            self.currencies = subtractSelected()
             // force view to do whatever it needs to do
             self.callback()
         })
@@ -130,6 +129,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
         default:
             break
         }
+        self.nsudProcessor.storedValue = self.selectedCurrencies
         self.nsudProcessor.save()
     }
     
@@ -160,7 +160,5 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     func subtractSelected() -> [String] {
         return self.originalList.filter { !self.selectedCurrencies.contains($0) } .sorted(by: <)
     }
-    
-    // MARK: Save/Restore selected currencies
     
 }

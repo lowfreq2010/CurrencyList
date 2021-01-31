@@ -24,7 +24,8 @@ class CurrencyListNSUD: NSObject {
     }
     
     func restore() -> [String] {
-        return self.userDefaults.object(forKey: self.key) as! [String]
+        guard let retValue = self.userDefaults.object(forKey: self.key) else {return []}
+        return retValue as! [String]
     }
 }
 
