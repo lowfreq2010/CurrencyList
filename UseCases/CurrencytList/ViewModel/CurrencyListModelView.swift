@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CurrencyListViewModelProtocol {
-    func processStar()
+    func processStar(on indexPath: IndexPath)
     func numberOfSections() -> Int
     func numberOfRows(for section:Int) -> Int
     func getTitle(for section:Int) -> String?
@@ -21,6 +21,9 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     private var selectedCurrencies: [String] = []
     private var currencies: [String] = []   // contains all currency codes to display
+    private var originalList: [String] = [] // contains all currency codes that existed originally
+    
+    var callback: () -> () = {}
     
     var selectedRow: Int  = 0
     
@@ -60,17 +63,35 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     // MARK: Convenience methods
     
+//    // fetch all currency data
+//    func getData(with callback:@escaping () -> ()) {
+//
+//        let _: Void = self.jsonFetcher.fetch({[unowned self] jsonData in
+//
+//            let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
+//            self.rates = currencyList.rates
+//            let names =  self.rates.map {$0.key}
+//            self.originalList = names.sorted(by:<)
+//            self.currencies = self.originalList // make a copy of currency codes for later use
+//
+//            // force view to do whatever it needs to do
+//            callback()
+//        })
+//    }
+    
     // fetch all currency data
-    func getData(with callback:@escaping () -> ()) {
+    func getData() {
         
         let _: Void = self.jsonFetcher.fetch({[unowned self] jsonData in
             
             let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
             self.rates = currencyList.rates
             let names =  self.rates.map {$0.key}
-            self.currencies = names.sorted(by:<)
+            self.originalList = names.sorted(by:<)
+            self.currencies = self.originalList // make a copy of currency codes for later use
+            
             // force view to do whatever it needs to do
-            callback()
+            self.callback()
         })
     }
     
@@ -84,10 +105,51 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
         return self.rates["\(self.getCurrency(for: row))"]!
     }
     
+    // return currency code for given row
+    func getSelectedCurrency(for row:Int) -> String {
+        return self.selectedCurrencies[row]
+    }
     
-    func processStar() {
-        print("Tapped on star in row:\(self.selectedRow)")
+    // return selected currency exchange rate for given row
+    func getSelectedCurrencyRate(for row:Int) -> Float {
+        return self.rates["\(self.getSelectedCurrency(for: row))"]!
     }
     
     
+    func processStar(on indexPath: IndexPath) -> Void {
+        print("Tapped on star in section: \(indexPath.section) row:\(indexPath.row)")
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        switch section {
+        case 0: // remove currency from selected list
+            self.removeFromSelected(from: row)
+        case 1: // move currency to selected list
+            self.moveCurrencyToSelected(from: row)
+        default:
+            break
+        }
+    }
+    
+    // MARK: processing append/remove to Selected list
+    
+    func moveCurrencyToSelected(from position: Int) -> Void {
+        let currencyName: String = self.getCurrency(for: position)
+        self.selectedCurrencies.append(currencyName)
+        self.currencies.remove(at: position)
+        print("moving to Selected in row \(position) Currency is \(currencyName)")
+        self.callback()
+    }
+    
+    func removeFromSelected(from position: Int) -> Void {
+        let currencyName = self.getCurrency(for: position)
+        self.selectedCurrencies.remove(at: position)
+        self.currencies = subtractSelected()
+        self.callback()
+        print("removing from Seleted in row \(position) Currency is \(currencyName)")
+    }
+    
+    func subtractSelected() -> [String] {
+        return self.originalList.filter { !self.selectedCurrencies.contains($0) } .sorted(by: <)
+    }
 }

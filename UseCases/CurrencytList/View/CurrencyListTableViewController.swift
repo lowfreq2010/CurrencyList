@@ -28,22 +28,18 @@ class CurrencyListTableViewController: UITableViewController {
         self.currencyListViewModel = CurrencyListViewModel()
         
         self.callback = { [unowned self] in
-            self.tableview.reloadData()
+            DispatchQueue.main.async {
+                self.tableview.reloadData()
+            }
         }
-        self.currencyListViewModel?.getData(with: self.callback)
+        self.currencyListViewModel?.callback = self.callback
+        self.currencyListViewModel?.getData()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableview.rowHeight = UITableView.automaticDimension
     }
-    
-    // MARK: - Support functions
-    @objc func makeStarred(with sender:UIButton) {
-        self.currencyListViewModel?.selectedRow = sender.tag
-        self.currencyListViewModel?.processStar()
-    }
-
 
     // MARK: - Table view data source
 
@@ -71,12 +67,32 @@ class CurrencyListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
         let section = indexPath.section
         let row  = indexPath.row
-        guard let string1 = self.currencyListViewModel?.getCurrency(for: row) else {return UITableViewCell()}
-        guard let string2 = self.currencyListViewModel?.getRate(for: row) else { return UITableViewCell()}
+        var string1,string2 :String
+        
+        switch section {
+        case 0:
+            string1 = self.currencyListViewModel?.getSelectedCurrency(for: row) ?? ""
+            string2 = String(self.currencyListViewModel?.getSelectedCurrencyRate(for: row) ?? 0)
+        case 1:
+            string1 = self.currencyListViewModel?.getCurrency(for: row) ?? ""
+            string2 = String(self.currencyListViewModel?.getRate(for: row) ?? 0)
+
+        default:
+            return UITableViewCell()
+        }
+
+        
+        // setup closure to be called on Star button tap
+        cell.selectCurrencyButtonAction = { [unowned self] in
+             print("Star button has been clicked")
+            self.currencyListViewModel?.processStar(on: indexPath)
+        }
         
         cell.currencyLabel.text = string1 + " - \(string2)"
-        cell.selectCurrency .addTarget(self, action: #selector(makeStarred(with:)), for: .touchUpInside)
-        cell.selectCurrency.tag = row
+        
+//        cell.selectCurrency .addTarget(self, action: #selector(makeStarred(with:)), for: .touchUpInside)
+//        cell.selectCurrency.tag = row
+        
         return cell
     }
 

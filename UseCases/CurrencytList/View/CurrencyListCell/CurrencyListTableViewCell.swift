@@ -12,6 +12,8 @@ class CurrencyListTableViewCell: UITableViewCell {
     
     @IBOutlet var currencyLabel: UILabel!
     @IBOutlet var selectCurrency: UIButton!
+    
+    var selectCurrencyButtonAction : (() -> ())?
 
     
     override func awakeFromNib() {
@@ -23,5 +25,9 @@ class CurrencyListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func selectCurrencyButtonTapped(_ sender: UIButton){
+        selectCurrencyButtonAction?()
     }
 }
