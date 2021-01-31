@@ -27,7 +27,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0o6-ge-5ej">
-                        <rect key="frame" x="270" y="16" width="34" height="34"/>
+                        <rect key="frame" x="274" y="16" width="30" height="34"/>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="39"/>
                         <state key="normal" title="*">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,7 +41,7 @@
                     <constraint firstItem="YCG-DO-pew" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NYL-mo-tOo"/>
                     <constraint firstAttribute="bottom" secondItem="YCG-DO-pew" secondAttribute="bottom" constant="23" id="Npn-Al-m2u"/>
                     <constraint firstItem="0o6-ge-5ej" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="VJf-0U-424"/>
-                    <constraint firstItem="0o6-ge-5ej" firstAttribute="leading" secondItem="YCG-DO-pew" secondAttribute="trailing" constant="100" id="dZ6-zZ-gw7"/>
+                    <constraint firstItem="0o6-ge-5ej" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YCG-DO-pew" secondAttribute="trailing" constant="100" id="dZ6-zZ-gw7"/>
                     <constraint firstAttribute="bottom" secondItem="0o6-ge-5ej" secondAttribute="bottom" constant="17" id="iGJ-zU-QB3"/>
                     <constraint firstItem="YCG-DO-pew" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="kdR-1J-P6g"/>
                     <constraint firstAttribute="trailing" secondItem="0o6-ge-5ej" secondAttribute="trailing" constant="16" id="lal-aK-PVm"/>
