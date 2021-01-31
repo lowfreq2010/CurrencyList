@@ -19,8 +19,7 @@ protocol CurrencyDetailViewModelProtocol {
 
 class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
 
-    var currencyName = "AED"  // code of currency shown on detail
-    var originalList: [String] = [] // contains all currency codes that existed originally
+    var currencyName = ""  // code of currency shown on detail
     var otherCurrencies: [String] = []
     var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
 
@@ -70,8 +69,17 @@ class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
         return self.otherCurrencies[row]
     }
     
-    // return currency exchange rate for given row
-    func calculateRate(for currencyCode: String) -> Float {
+    // return currency exchange rate against base currency
+    func getRate(for currencyCode: String) -> Float {
         return self.rates["\(currencyCode)"]!
+    }
+    
+    // return currency exchange rate for given cureency againd selected currency
+    func calculateRate(for currencyCode: String) -> Float {
+        
+        let selectedUSDRate = self.getRate(for: self.currencyName)
+        let passedUSDRate = self.getRate(for: currencyCode)
+        let calculatedRate =  selectedUSDRate/passedUSDRate
+        return calculatedRate
     }
 }
