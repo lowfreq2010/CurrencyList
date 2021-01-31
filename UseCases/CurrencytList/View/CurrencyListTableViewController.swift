@@ -74,9 +74,11 @@ class CurrencyListTableViewController: UITableViewController {
         case 0:
             string1 = self.currencyListViewModel?.getSelectedCurrency(for: row) ?? ""
             string2 = String(self.currencyListViewModel?.getSelectedCurrencyRate(for: row) ?? 0)
+            cell.selectCurrency.setTitleColor(.red, for: .normal)
         case 1:
             string1 = self.currencyListViewModel?.getCurrency(for: row) ?? ""
             string2 = String(self.currencyListViewModel?.getRate(for: row) ?? 0)
+            cell.selectCurrency.setTitleColor(.black, for: .normal)
 
         default:
             return UITableViewCell()
