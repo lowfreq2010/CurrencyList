@@ -19,7 +19,6 @@ class CurrencyDetailTableViewController: UITableViewController {
         // register custom cells with tableview
         let nibCell :UINib = UINib(nibName: "CurrencyDetailTableViewCell", bundle: nil)
         self.tableview.register(nibCell, forCellReuseIdentifier: "detailCell")
-        self.currencyDetailViewModel = CurrencyDetailViewModel()
         self.tableview.reloadData()
         
     }
@@ -40,8 +39,7 @@ class CurrencyDetailTableViewController: UITableViewController {
     }
     
      override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let title = self.currencyDetailViewModel.getTitle(for: section) else {return String()}
-        return title
+        return self.currencyDetailViewModel.getTitle(for: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

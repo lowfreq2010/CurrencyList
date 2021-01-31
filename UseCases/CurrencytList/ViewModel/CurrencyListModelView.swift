@@ -30,11 +30,26 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
         }
     }
     
-    var originalCurrencies: [String] {
+//    var originalCurrencies: [String] {
+//        get {
+//            return self.originalList
+//        }
+//    }
+    
+    var currentList: [String] {
         get {
-            return self.originalList
+            return self.currencies
         }
     }
+    
+    var selectedList: [String] {
+        get {
+            return self.selectedCurrencies
+        }
+    }
+    
+    
+    
     
     var callback: () -> () = {}
     

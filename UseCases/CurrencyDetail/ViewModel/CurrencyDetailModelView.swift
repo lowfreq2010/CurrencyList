@@ -12,8 +12,8 @@ protocol CurrencyDetailViewModelProtocol {
     
     func numberOfSections() -> Int
     func numberOfRows(for section:Int) -> Int
-    func getTitle(for section:Int) -> String?
-    func headerForTable() -> String?
+    func getTitle(for section:Int) -> String
+    func headerForTable() -> String
     
 }
 
@@ -26,8 +26,8 @@ class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
 
     // MARK: UITableview delegate/source
     
-    func headerForTable() -> String? {
-        return self.currencyName
+    func headerForTable() -> String {
+        return NSLocalizedString("SELECTECURRENCY", comment: "") + " - " + self.currencyName
     }
     
     func numberOfSections()->Int {
@@ -49,8 +49,18 @@ class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
         return numOfRows
     }
     
-    func getTitle(for section:Int) -> String? {
-        return NSLocalizedString("ALLOTHERCURRENCIES", comment: "")
+    func getTitle(for section:Int) -> String {
+        var title: String = ""
+        
+        switch section {
+        case 0:
+            title = self.headerForTable()
+        case 1:
+            title = NSLocalizedString("ALLOTHERCURRENCIES", comment: "")
+        default:
+            break
+        }
+        return title
     }
     
     // MARK: Convenience methods
