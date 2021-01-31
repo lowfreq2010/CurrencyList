@@ -55,6 +55,7 @@ class CurrencyListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Section \(indexPath.section) Row \(indexPath.row)")
+        performSegue(withIdentifier: "toCurrencyDetail", sender: indexPath)
     }
     
      override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -96,14 +97,18 @@ class CurrencyListTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toCurrencyDetail" {
+            let vc = segue.destination as! CurrencyDetailTableViewController
+            vc.currencyDetailViewModel?.currencyName = "AED"  // code of currency shown on detail
+            vc.currencyDetailViewModel?.originalList = self.currencyListViewModel?.originalCurrencies ?? []
+            vc.currencyDetailViewModel?.rates =  self.currencyListViewModel?.originalRates ?? [:]
+            print("yeah")
+        }
     }
-    */
-
 }

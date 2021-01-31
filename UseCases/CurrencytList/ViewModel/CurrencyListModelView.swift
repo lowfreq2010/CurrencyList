@@ -24,6 +24,18 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     private var currencies: [String] = []   // contains all currency codes to display
     private var originalList: [String] = [] // contains all currency codes that existed originally
     
+    var originalRates: [String:Float] {
+        get {
+            return self.rates
+        }
+    }
+    
+    var originalCurrencies: [String] {
+        get {
+            return self.originalList
+        }
+    }
+    
     var callback: () -> () = {}
     
     var selectedRow: Int  = 0
