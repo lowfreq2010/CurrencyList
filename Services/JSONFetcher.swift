@@ -24,8 +24,13 @@ class JSONOnlineFetcher: Fetcher {
     
     override func fetch(_ completion: @escaping (Data) -> ()) -> Void  {
         guard let url = URL(string: self.jsonSource) else {return}
-        guard let data = try? Data(contentsOf: url) else {return}
-        completion(data)
+//        guard let data = try? Data(contentsOf: url) else {return}
+        // let use URLSession for async JSON request
+        URLSession.shared.dataTask(with: url) { data, response, error in
+              if let data = data {
+                 completion(data)
+               }
+           }.resume()
     }
 }
 
