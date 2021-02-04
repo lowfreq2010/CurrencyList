@@ -7,27 +7,85 @@
 
 import Foundation
 
+protocol NetworkServiceDescription {
+    var api: String { get set }
+    var endpoint:String { get set}
+    var baseURL:String { get}
+    var serviceKey: String {get}
+    var requestParams: [String:String] {get}
+
+}
+
+extension NetworkServiceDescription {
+    
+    var requestURL: String {
+        get {
+            return self.constructRequest()
+        }
+    }
+    private func constructRequest() -> String {
+        var requestedString = self.baseURL+self.api+endpoint
+        var count = 0
+        let paramCount = requestParams.count
+        for (key, value)  in requestParams {
+            switch count {
+            case 0:
+                requestedString += "?"
+            default:
+                if count < paramCount {
+                    requestedString += "&"
+                }
+            }
+            requestedString = requestedString + key + "=" + value
+            count += 1
+        }
+        return requestedString
+    }
+}
+
+struct OpenExchangeRate: NetworkServiceDescription {
+
+    var serviceKey: String = "3e58b5f8575742b7817e51d5e1196c0b"
+    var baseURL: String = "https://openexchangerates.org/"
+    var api: String = "api/"
+    var endpoint: String = "latest.json"
+    var requestParams: [String:String]
+    
+    init(with params:[String:String]) {
+        self.requestParams = params
+    }
+    
+
+}
+
 class Fetcher: NSObject {
-    var jsonSource:String = ""
+    var jsonSource:String
+    let service: NetworkServiceDescription
+    
     func fetch(_ completion: @escaping (Data) -> ()) -> Void {
+    }
+    init(with service:NetworkServiceDescription) {
+        self.service = service
+        self.jsonSource = self.service.requestURL
     }
 }
 
 class JSONOnlineFetcher: Fetcher {
     
-    let appID = "3e58b5f8575742b7817e51d5e1196c0b"  // change to your own
-    
-    override init() {
-        super.init()
-        self.jsonSource = "https://openexchangerates.org/api/latest.json?app_id=\(appID)"
+    init() {
+        let params = ["app_id" : "3e58b5f8575742b7817e51d5e1196c0b", "ddd":"33"]
+        super.init(with:OpenExchangeRate(with: params))
+        // self.jsonSource = "https://openexchangerates.org/api/latest.json?app_id=\(appID)"
+        self.jsonSource = service.requestURL
+        print(self.jsonSource)
     }
     
     override func fetch(_ completion: @escaping (Data) -> ()) -> Void  {
         guard let url = URL(string: self.jsonSource) else {return}
-//        guard let data = try? Data(contentsOf: url) else {return}
         // let use URLSession for async JSON request
         URLSession.shared.dataTask(with: url) { data, response, error in
               if let data = data {
+                 // pass the data to completion block
                  completion(data)
                }
            }.resume()
