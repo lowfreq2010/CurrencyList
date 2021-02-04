@@ -73,7 +73,7 @@ class Fetcher: NSObject {
 class JSONOnlineFetcher: Fetcher {
     
     init() {
-        let params = ["app_id" : "3e58b5f8575742b7817e51d5e1196c0b", "ddd":"33"]
+        let params = ["app_id" : "3e58b5f8575742b7817e51d5e1196c0b"]
         super.init(with:OpenExchangeRate(with: params))
         // self.jsonSource = "https://openexchangerates.org/api/latest.json?app_id=\(appID)"
         self.jsonSource = service.requestURL
