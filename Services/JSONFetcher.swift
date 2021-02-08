@@ -13,7 +13,7 @@ protocol NetworkServiceDescription {
     var baseURL:String { get}
     var serviceKey: String {get}
     var requestParams: [String:String] {get}
-
+    
 }
 
 extension NetworkServiceDescription {
@@ -44,7 +44,7 @@ extension NetworkServiceDescription {
 }
 
 struct OpenExchangeRate: NetworkServiceDescription {
-
+    
     var serviceKey: String = "3e58b5f8575742b7817e51d5e1196c0b"
     var baseURL: String = "https://openexchangerates.org/"
     var api: String = "api/"
@@ -55,46 +55,50 @@ struct OpenExchangeRate: NetworkServiceDescription {
         self.requestParams = params
     }
     
-
+    
 }
 
-class Fetcher: NSObject {
+protocol Fetchable: class {
+    func fetch(_ completion: @escaping (Data) -> ()) -> Void
+}
+
+class Fetcher: Fetchable {
     var jsonSource:String
     let service: NetworkServiceDescription
     
     func fetch(_ completion: @escaping (Data) -> ()) -> Void {
     }
+    
     init(with service:NetworkServiceDescription) {
         self.service = service
         self.jsonSource = self.service.requestURL
     }
 }
 
+// Fetch via URLSession class
 class JSONOnlineFetcher: Fetcher {
     
     init() {
         let params = ["app_id" : "3e58b5f8575742b7817e51d5e1196c0b"]
         super.init(with:OpenExchangeRate(with: params))
-        print(self.jsonSource)
     }
     
     override func fetch(_ completion: @escaping (Data) -> ()) -> Void  {
         guard let url = URL(string: self.jsonSource) else {return}
         // let use URLSession for async JSON request
         URLSession.shared.dataTask(with: url) { data, response, error in
-              if let data = data {
-                 // pass the data to completion block
-                 completion(data)
-               }
-           }.resume()
+            if let data = data {
+                // pass the data to completion block
+                completion(data)
+            }
+        }.resume()
     }
 }
 
-// mock for developemnt/testing purpose
-class JSONOfflineFetcher: Fetcher {
+// offline mock for developemnt/testing purpose
+class JSONOfflineFetcher: Fetchable {
     
-    override func fetch(_ completion: @escaping (Data)->()) -> () {
-        self.jsonSource = """
+    let jsonSource = """
         {
            "disclaimer":"https://openexchangerates.org/terms/",
            "license":"https://openexchangerates.org/license/",
@@ -112,6 +116,8 @@ class JSONOfflineFetcher: Fetcher {
            }
         }
         """
+    
+    func fetch(_ completion: @escaping (Data)->()) -> () {
         let data = self.jsonSource.data(using: .utf8)!
         completion(data)
     }

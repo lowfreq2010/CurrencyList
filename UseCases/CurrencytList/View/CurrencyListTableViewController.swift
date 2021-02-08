@@ -21,18 +21,22 @@ class CurrencyListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // register custom cells with tableview
         let nibCell :UINib = UINib(nibName: "CurrencyListTableViewCell", bundle: nil)
         self.tableview.register(nibCell, forCellReuseIdentifier: "currencyCell")
-        //set viewModel
-        self.currencyListViewModel = CurrencyListViewModel(with: JSONOnlineFetcher()) //you can pass JSONOfflineFetcher() for development purposes
         
+        //set viewModel
+        self.currencyListViewModel = CurrencyListViewModel()
+        // bind tableview to updates in ViewModel
         self.callback = { [unowned self] in
             DispatchQueue.main.async {
                 self.tableview.reloadData()
             }
         }
         self.currencyListViewModel?.callback = self.callback
+        
+        // start asynchronous fetch
         self.currencyListViewModel?.getData()
         
     }
@@ -44,7 +48,6 @@ class CurrencyListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return (self.currencyListViewModel?.numberOfSections())!
     }
 
@@ -54,7 +57,6 @@ class CurrencyListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Section \(indexPath.section) Row \(indexPath.row)")
         performSegue(withIdentifier: "toCurrencyDetail", sender: indexPath)
     }
     
@@ -83,10 +85,8 @@ class CurrencyListTableViewController: UITableViewController {
             return UITableViewCell()
         }
 
-        
         // setup closure to be called on Star button tap
         cell.selectCurrencyButtonAction = { [unowned self] in
-             print("Star button has been clicked")
             self.currencyListViewModel?.processStar(on: indexPath)
         }
         
