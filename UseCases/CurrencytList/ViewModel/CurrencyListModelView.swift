@@ -27,7 +27,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     var selectedList: [String] {get {return self.selectedCurrencies}}
     var originalRates: [String:Float] { get { return self.currencyModel.originalRates }}
     
-    var callback: () -> () = {}
+    var callback: () -> () = {} //binding callback for refreshing view with new data
     
     var selectedRow: Int  = 0
     

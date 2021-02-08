@@ -75,6 +75,7 @@ class Fetcher: Fetchable {
     }
 }
 
+// Fetch via URLSession class
 class JSONOnlineFetcher: Fetcher {
     
     init() {
@@ -94,11 +95,10 @@ class JSONOnlineFetcher: Fetcher {
     }
 }
 
-// mock for developemnt/testing purpose
-class JSONOfflineFetcher: Fetcher {
+// offline mock for developemnt/testing purpose
+class JSONOfflineFetcher: Fetchable {
     
-    override func fetch(_ completion: @escaping (Data)->()) -> () {
-        self.jsonSource = """
+    let jsonSource = """
         {
            "disclaimer":"https://openexchangerates.org/terms/",
            "license":"https://openexchangerates.org/license/",
@@ -116,6 +116,8 @@ class JSONOfflineFetcher: Fetcher {
            }
         }
         """
+    
+    func fetch(_ completion: @escaping (Data)->()) -> () {
         let data = self.jsonSource.data(using: .utf8)!
         completion(data)
     }
