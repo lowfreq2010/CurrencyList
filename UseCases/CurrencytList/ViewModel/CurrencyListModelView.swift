@@ -18,32 +18,14 @@ protocol CurrencyListViewModelProtocol {
 
 class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
-    private var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
+    let currencyModel = CurrencyModel(with: JSONOnlineFetcher()) //you can pass JSONOfflineFetcher() for development purposes
     
-    private var selectedCurrencies: [String] = []
-    private var currencies: [String] = []   // contains all currency codes to display
-    private var originalList: [String] = [] // contains all currency codes that existed originally
+    private var selectedCurrencies: [String] = [] // contains currency codes/rate to display in selected list
+    private var currencies: [String] = []   // contains currency codes/rate to display in main list
     
-    var originalRates: [String:Float] {
-        get {
-            return self.rates
-        }
-    }
-    
-    var currentList: [String] {
-        get {
-            return self.currencies
-        }
-    }
-    
-    var selectedList: [String] {
-        get {
-            return self.selectedCurrencies
-        }
-    }
-    
-    
-    
+    var currentList: [String] {get {return self.currencies}}
+    var selectedList: [String] {get {return self.selectedCurrencies}}
+    var originalRates: [String:Float] { get { return self.currencyModel.originalRates }}
     
     var callback: () -> () = {}
     
@@ -51,15 +33,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     // MARK: Service class objects
     
-    let jsonFetcher: Fetcher
-
-    let jsonProcessor: JSONProcessor = JSONProcessor()
     let nsudProcessor: CurrencyListNSUD = CurrencyListNSUD(with: "selectedCurrencies", value: [])
-    
-    // MARK: Initializers
-    init(with fetcher:Fetcher) {
-        self.jsonFetcher = fetcher
-    }
     
     // MARK: UITableview delegate/source
     func numberOfSections()->Int {
@@ -95,19 +69,16 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     // fetch all currency data
     func getData() {
-        
-        let _: Void = self.jsonFetcher.fetch({[unowned self] jsonData in
+        // ask model to load data from server and prepare data for view
+        self.currencyModel.getData({[weak self] in
             
-            let currencyList: CurrencyResponse = self.jsonProcessor.decode(from: jsonData)
-            self.rates = currencyList.rates
-            let names =  self.rates.map {$0.key}
-            self.originalList = names.sorted(by:<)
             // try to restore saved selected currencies
-            let selCurr: [String]? = self.nsudProcessor.restore()
-            self.selectedCurrencies = selCurr ?? []
-            self.currencies = subtractSelected()
-            // force view to do whatever it needs to do
-            self.callback()
+            let selCurr: [String]? = self?.nsudProcessor.restore()
+            self?.selectedCurrencies = selCurr ?? []
+            self?.currencies = self?.subtractSelected() ?? []
+            // call binding callback to update the view accordingly
+            self?.callback()
+            
         })
     }
     
@@ -118,17 +89,17 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     
     // return currency exchange rate for given row
     func getRate(for row:Int) -> Float {
-        return self.rates["\(self.getCurrency(for: row))"]!
+        return self.currencyModel.originalRates["\(self.getCurrency(for: row))"]!
     }
     
-    // return currency code for given row
+    // return selected currency code for given row
     func getSelectedCurrency(for row:Int) -> String {
         return self.selectedCurrencies[row]
     }
     
     // return selected currency exchange rate for given row
     func getSelectedCurrencyRate(for row:Int) -> Float {
-        return self.rates["\(self.getSelectedCurrency(for: row))"]!
+        return self.currencyModel.originalRates["\(self.getSelectedCurrency(for: row))"]!
     }
     
     
@@ -174,7 +145,7 @@ class CurrencyListViewModel: CurrencyListViewModelProtocol {
     }
     
     func subtractSelected() -> [String] {
-        return self.originalList.filter { !self.selectedCurrencies.contains($0) } .sorted(by: <)
+        return self.currencyModel.originalCurrencies.filter { !self.selectedCurrencies.contains($0) } .sorted(by: <)
     }
     
 }

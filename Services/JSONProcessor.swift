@@ -7,8 +7,11 @@
 
 import Foundation
 
+protocol DataProcessing {
+    func decode(from jsonData:Data) -> CurrencyResponse
+}
 
-class JSONProcessor: NSObject {
+class JSONProcessor: DataProcessing {
     
     func decode(from jsonData:Data) -> CurrencyResponse {
 
