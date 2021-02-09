@@ -153,13 +153,13 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
-		B776EAB225D2C47E00169465 /* NetworkServiceProotocols */ = {
+		B776EAB225D2C47E00169465 /* NetworkServiceProtocols */ = {
 			isa = PBXGroup;
 			children = (
 				B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */,
 				B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */,
 			);
-			path = NetworkServiceProotocols;
+			path = NetworkServiceProtocols;
 			sourceTree = "<group>";
 		};
 		B792790925C46DEB00E3C129 /* CurrencyDetail */ = {
@@ -177,7 +177,7 @@
 				B792790B25C4B12A00E3C129 /* JSONFetcher.swift */,
 				B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */,
 				B765616025C710DD0006E4FA /* PersistentStorage.swift */,
-				B776EAB225D2C47E00169465 /* NetworkServiceProotocols */,
+				B776EAB225D2C47E00169465 /* NetworkServiceProtocols */,
 			);
 			path = Services;
 			sourceTree = "<group>";
