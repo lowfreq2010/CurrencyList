@@ -18,6 +18,8 @@
 		B723EBD125BAAA140057DB36 /* CurrencyListModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */; };
 		B723EBD225BAAA140057DB36 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */; };
 		B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B765616025C710DD0006E4FA /* PersistentStorage.swift */; };
+		B776EAB025D2C45600169465 /* OpenExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */; };
+		B776EAB525D2C54D00169465 /* NetworkServiceDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */; };
 		B792790C25C4B12A00E3C129 /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790B25C4B12A00E3C129 /* JSONFetcher.swift */; };
 		B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */; };
 		B7ADE13E25C6098E00C82720 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE14025C6098E00C82720 /* Localizable.strings */; };
@@ -26,7 +28,6 @@
 		B7ADE15425C6BB5B00C82720 /* CurrencyDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE15225C6BB5B00C82720 /* CurrencyDetailTableViewCell.xib */; };
 		B7ADE15525C6BB5B00C82720 /* CurrencyDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADE15325C6BB5B00C82720 /* CurrencyDetailTableViewCell.swift */; };
 		B7ADE15C25C6C00F00C82720 /* CurrencyDetailModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADE15B25C6C00F00C82720 /* CurrencyDetailModelView.swift */; };
-		B7B15BCB25D28461004B1F38 /* NetworkServiceDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B15BCA25D28461004B1F38 /* NetworkServiceDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListModelView.swift; sourceTree = "<group>"; };
 		B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		B765616025C710DD0006E4FA /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
+		B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenExchangeRate.swift; sourceTree = "<group>"; };
+		B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServiceDescription.swift; sourceTree = "<group>"; };
 		B792790B25C4B12A00E3C129 /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
 		B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONProcessor.swift; sourceTree = "<group>"; };
 		B7ADE13625C608BD00C82720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,7 +54,6 @@
 		B7ADE15225C6BB5B00C82720 /* CurrencyDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B7ADE15325C6BB5B00C82720 /* CurrencyDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B7ADE15B25C6C00F00C82720 /* CurrencyDetailModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailModelView.swift; sourceTree = "<group>"; };
-		B7B15BCA25D28461004B1F38 /* NetworkServiceDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,15 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		B776EAB225D2C47E00169465 /* NetworkServiceProotocols */ = {
+			isa = PBXGroup;
+			children = (
+				B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */,
+				B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */,
+			);
+			path = NetworkServiceProotocols;
+			sourceTree = "<group>";
+		};
 		B792790925C46DEB00E3C129 /* CurrencyDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +177,7 @@
 				B792790B25C4B12A00E3C129 /* JSONFetcher.swift */,
 				B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */,
 				B765616025C710DD0006E4FA /* PersistentStorage.swift */,
-				B7B15BCA25D28461004B1F38 /* NetworkServiceDescription.swift */,
+				B776EAB225D2C47E00169465 /* NetworkServiceProotocols */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -272,10 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B776EAB025D2C45600169465 /* OpenExchangeRate.swift in Sources */,
 				B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */,
 				B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */,
 				B723EBA325B9B7400057DB36 /* AppDelegate.swift in Sources */,
-				B7B15BCB25D28461004B1F38 /* NetworkServiceDescription.swift in Sources */,
 				B723EBA525B9B7400057DB36 /* SceneDelegate.swift in Sources */,
 				B723EBD125BAAA140057DB36 /* CurrencyListModelView.swift in Sources */,
 				B7ADE14F25C6BAE100C82720 /* CurrencyDetailTableViewController.swift in Sources */,
@@ -283,6 +294,7 @@
 				B723EBCE25BAAA140057DB36 /* CurrencyListTableViewCell.swift in Sources */,
 				B723EBD025BAAA140057DB36 /* CurrencyListTableViewController.swift in Sources */,
 				B723EBD225BAAA140057DB36 /* CurrencyModel.swift in Sources */,
+				B776EAB525D2C54D00169465 /* NetworkServiceDescription.swift in Sources */,
 				B7ADE15C25C6C00F00C82720 /* CurrencyDetailModelView.swift in Sources */,
 				B792790C25C4B12A00E3C129 /* JSONFetcher.swift in Sources */,
 			);

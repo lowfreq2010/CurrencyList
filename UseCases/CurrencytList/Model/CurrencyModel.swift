@@ -18,15 +18,18 @@ struct CurrencyResponse: Decodable {
 }
 
 class CurrencyModel {
+    
+    // MARK: Private properties
     private var rates: CurrencyRate = [:] //contains all currency/exchange rate pairs
+    private var originalList: [String] = [] // contains all currency codes that existed originally
+    private let jsonFetcher: Fetchable
+    private let jsonProcessor: JSONProcessor = JSONProcessor()
+    
+    // MARK: Public properties
+    var originalCurrencies: [String] { get { return self.originalList }}
     var originalRates: CurrencyRate { get { return self.rates }}
     
-    private var originalList: [String] = [] // contains all currency codes that existed originally
-    var originalCurrencies: [String] { get { return self.originalList }}
-    
-    let jsonFetcher: Fetchable
-    let jsonProcessor: JSONProcessor = JSONProcessor()
-    
+    // MARK: Class initializers and methods
     init(with fetcher:Fetchable) {
         self.jsonFetcher = fetcher
     }
