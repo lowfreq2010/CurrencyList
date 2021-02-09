@@ -7,41 +7,6 @@
 
 import Foundation
 
-protocol NetworkServiceDescription {
-    var api: String { get set }
-    var endpoint:String { get set}
-    var baseURL:String { get}
-    var serviceKey: String {get}
-    var requestParams: [String:String] {get}
-    
-}
-
-extension NetworkServiceDescription {
-    
-    var requestURL: String {
-        get {
-            return self.constructRequest()
-        }
-    }
-    private func constructRequest() -> String {
-        var requestedString = self.baseURL+self.api+endpoint
-        var count = 0
-        let paramCount = requestParams.count
-        for (key, value)  in requestParams {
-            switch count {
-            case 0:
-                requestedString += "?"
-            default:
-                if count < paramCount {
-                    requestedString += "&"
-                }
-            }
-            requestedString = requestedString + key + "=" + value
-            count += 1
-        }
-        return requestedString
-    }
-}
 
 struct OpenExchangeRate: NetworkServiceDescription {
     
@@ -54,16 +19,15 @@ struct OpenExchangeRate: NetworkServiceDescription {
     init(with params:[String:String]) {
         self.requestParams = params
     }
-    
-    
 }
 
 protocol Fetchable: class {
+    var sourceURL: String { get set }
     func fetch(_ completion: @escaping (Data) -> ()) -> Void
 }
 
 class Fetcher: Fetchable {
-    var jsonSource:String
+    var sourceURL:String = ""
     let service: NetworkServiceDescription
     
     func fetch(_ completion: @escaping (Data) -> ()) -> Void {
@@ -71,7 +35,7 @@ class Fetcher: Fetchable {
     
     init(with service:NetworkServiceDescription) {
         self.service = service
-        self.jsonSource = self.service.requestURL
+        self.sourceURL = self.service.requestURL
     }
 }
 
@@ -84,7 +48,7 @@ class JSONOnlineFetcher: Fetcher {
     }
     
     override func fetch(_ completion: @escaping (Data) -> ()) -> Void  {
-        guard let url = URL(string: self.jsonSource) else {return}
+        guard let url = URL(string: self.sourceURL) else {return}
         // let use URLSession for async JSON request
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
@@ -96,9 +60,10 @@ class JSONOnlineFetcher: Fetcher {
 }
 
 // offline mock for developemnt/testing purpose
+// just inject it into jsonFetcher property of CurrencyModel
 class JSONOfflineFetcher: Fetchable {
     
-    let jsonSource = """
+    var sourceURL: String = """
         {
            "disclaimer":"https://openexchangerates.org/terms/",
            "license":"https://openexchangerates.org/license/",
@@ -118,8 +83,7 @@ class JSONOfflineFetcher: Fetchable {
         """
     
     func fetch(_ completion: @escaping (Data)->()) -> () {
-        let data = self.jsonSource.data(using: .utf8)!
-        completion(data)
+        completion(self.sourceURL.data(using: .utf8)!)
     }
 }
 

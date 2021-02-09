@@ -7,29 +7,27 @@
 
 import Foundation
 
-struct Currency {
-    let code: String
-    let rate: Float
-}
+typealias CurrencyRate = [String:Float]
 
 struct CurrencyResponse: Decodable {
     let disclaimer:String
     let license:String
     let timestamp: Double
     let base: String
-    let rates: [String:Float]
+    let rates: CurrencyRate
 }
 
 class CurrencyModel {
-    private var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
-    var originalRates: [String:Float] { get { return self.rates }}
+    private var rates: CurrencyRate = [:] //contains all currency/exchange rate pairs
+    var originalRates: CurrencyRate { get { return self.rates }}
+    
     private var originalList: [String] = [] // contains all currency codes that existed originally
     var originalCurrencies: [String] { get { return self.originalList }}
     
-    let jsonFetcher: Fetcher
+    let jsonFetcher: Fetchable
     let jsonProcessor: JSONProcessor = JSONProcessor()
     
-    init(with fetcher:Fetcher) {
+    init(with fetcher:Fetchable) {
         self.jsonFetcher = fetcher
     }
     

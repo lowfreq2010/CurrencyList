@@ -21,7 +21,7 @@ class CurrencyDetailViewModel: CurrencyDetailViewModelProtocol {
 
     var currencyName = ""  // code of currency shown on detail
     var otherCurrencies: [String] = []
-    var rates: [String:Float] = [:] //contains all currency/exchange rate pairs
+    var rates: CurrencyRate = [:] //contains all currency/exchange rate pairs
 
     // MARK: UITableview delegate/source
     

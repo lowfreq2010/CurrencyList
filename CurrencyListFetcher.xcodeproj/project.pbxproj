@@ -26,6 +26,7 @@
 		B7ADE15425C6BB5B00C82720 /* CurrencyDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7ADE15225C6BB5B00C82720 /* CurrencyDetailTableViewCell.xib */; };
 		B7ADE15525C6BB5B00C82720 /* CurrencyDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADE15325C6BB5B00C82720 /* CurrencyDetailTableViewCell.swift */; };
 		B7ADE15C25C6C00F00C82720 /* CurrencyDetailModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADE15B25C6C00F00C82720 /* CurrencyDetailModelView.swift */; };
+		B7B15BCB25D28461004B1F38 /* NetworkServiceDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B15BCA25D28461004B1F38 /* NetworkServiceDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		B7ADE15225C6BB5B00C82720 /* CurrencyDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B7ADE15325C6BB5B00C82720 /* CurrencyDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B7ADE15B25C6C00F00C82720 /* CurrencyDetailModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailModelView.swift; sourceTree = "<group>"; };
+		B7B15BCA25D28461004B1F38 /* NetworkServiceDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				B792790B25C4B12A00E3C129 /* JSONFetcher.swift */,
 				B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */,
 				B765616025C710DD0006E4FA /* PersistentStorage.swift */,
+				B7B15BCA25D28461004B1F38 /* NetworkServiceDescription.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */,
 				B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */,
 				B723EBA325B9B7400057DB36 /* AppDelegate.swift in Sources */,
+				B7B15BCB25D28461004B1F38 /* NetworkServiceDescription.swift in Sources */,
 				B723EBA525B9B7400057DB36 /* SceneDelegate.swift in Sources */,
 				B723EBD125BAAA140057DB36 /* CurrencyListModelView.swift in Sources */,
 				B7ADE14F25C6BAE100C82720 /* CurrencyDetailTableViewController.swift in Sources */,
