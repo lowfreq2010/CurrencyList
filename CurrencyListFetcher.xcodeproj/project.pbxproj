@@ -18,7 +18,6 @@
 		B723EBD125BAAA140057DB36 /* CurrencyListModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */; };
 		B723EBD225BAAA140057DB36 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */; };
 		B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B765616025C710DD0006E4FA /* PersistentStorage.swift */; };
-		B776EAB025D2C45600169465 /* OpenExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */; };
 		B776EAB525D2C54D00169465 /* NetworkServiceDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */; };
 		B792790C25C4B12A00E3C129 /* JSONFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790B25C4B12A00E3C129 /* JSONFetcher.swift */; };
 		B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */; };
@@ -42,7 +41,6 @@
 		B723EBCB25BAAA140057DB36 /* CurrencyListModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyListModelView.swift; sourceTree = "<group>"; };
 		B723EBCD25BAAA140057DB36 /* CurrencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		B765616025C710DD0006E4FA /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
-		B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenExchangeRate.swift; sourceTree = "<group>"; };
 		B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServiceDescription.swift; sourceTree = "<group>"; };
 		B792790B25C4B12A00E3C129 /* JSONFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
 		B792790F25C4B6DA00E3C129 /* JSONProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONProcessor.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				B776EAB425D2C54C00169465 /* NetworkServiceDescription.swift */,
-				B776EAAF25D2C45600169465 /* OpenExchangeRate.swift */,
 			);
 			path = NetworkServiceProtocols;
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B776EAB025D2C45600169465 /* OpenExchangeRate.swift in Sources */,
 				B765616125C710DD0006E4FA /* PersistentStorage.swift in Sources */,
 				B792791025C4B6DA00E3C129 /* JSONProcessor.swift in Sources */,
 				B723EBA325B9B7400057DB36 /* AppDelegate.swift in Sources */,
