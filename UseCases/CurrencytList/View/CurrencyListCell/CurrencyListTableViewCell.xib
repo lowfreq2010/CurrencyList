@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,13 +31,14 @@
                         <rect key="frame" x="274" y="16" width="30" height="34"/>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="39"/>
                         <state key="normal" title="*">
-                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="titleColor" systemColor="labelColor"/>
                         </state>
                         <connections>
                             <action selector="selectCurrencyButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="klK-E3-OuM"/>
                         </connections>
                     </button>
                 </subviews>
+                <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                 <constraints>
                     <constraint firstItem="YCG-DO-pew" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NYL-mo-tOo"/>
                     <constraint firstAttribute="bottom" secondItem="YCG-DO-pew" secondAttribute="bottom" constant="23" id="Npn-Al-m2u"/>
@@ -58,4 +60,12 @@
             <point key="canvasLocation" x="452.803738317757" y="174.62203023758101"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -70,13 +70,13 @@ class CurrencyListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "currencyCell", for: indexPath) as? CurrencyListTableViewCell else {return UITableViewCell()}
         let section = indexPath.section
         let row  = indexPath.row
-        var string1,string2 :String , buttonColor: UIColor = .black
+        var string1,string2 :String , buttonColor = UIColor.label
         
         switch section {
         case 0:
             string1 = self.currencyListViewModel?.getSelectedCurrency(for: row) ?? ""
             string2 = String(self.currencyListViewModel?.getSelectedCurrencyRate(for: row) ?? 0)
-            buttonColor = .red
+            buttonColor = .systemRed
         case 1:
             string1 = self.currencyListViewModel?.getCurrency(for: row) ?? ""
             string2 = String(self.currencyListViewModel?.getRate(for: row) ?? 0)
